@@ -1,0 +1,967 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Premium Cake Studio</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap");
+
+      :root {
+        --bg: #fffaf9;
+        --surface: #ffffff;
+        --surface-soft: #fff4f1;
+        --text: #2f2222;
+        --muted: #77696a;
+        --line: rgba(90, 60, 52, 0.1);
+        --pink: #f7cfd8;
+        --lavender: #d9d0f8;
+        --mint: #d8f0e6;
+        --sky: #dceeff;
+        --mocha: #6a4a42;
+        --mocha-deep: #47302c;
+        --gold: #d8b574;
+        --shadow: 0 20px 50px rgba(92, 60, 52, 0.12);
+        --shadow-soft: 0 12px 30px rgba(92, 60, 52, 0.08);
+        --radius-xl: 34px;
+        --radius-lg: 26px;
+        --radius-md: 20px;
+        --radius-sm: 14px;
+        --container: min(1180px, calc(100% - 2rem));
+        --transition: 0.3s ease;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Manrope", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(
+            circle at top left,
+            rgba(247, 207, 216, 0.45),
+            transparent 26%
+          ),
+          radial-gradient(
+            circle at top right,
+            rgba(217, 208, 248, 0.42),
+            transparent 24%
+          ),
+          radial-gradient(
+            circle at 78% 70%,
+            rgba(216, 240, 230, 0.45),
+            transparent 22%
+          ),
+          linear-gradient(180deg, #fffdfc 0%, #fff7f4 55%, #fffaf9 100%);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      img {
+        display: block;
+        width: 100%;
+        object-fit: cover;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .container {
+        width: var(--container);
+        margin: 0 auto;
+      }
+
+      .section {
+        padding: 5.5rem 0;
+      }
+
+      .section-head {
+        max-width: 740px;
+        margin: 0 auto 2.8rem;
+        text-align: center;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        padding: 0.5rem 0.95rem;
+        border-radius: 999px;
+        background: linear-gradient(
+          135deg,
+          rgba(247, 207, 216, 0.55),
+          rgba(216, 240, 230, 0.65)
+        );
+        color: var(--mocha);
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+        border: 1px solid rgba(106, 74, 66, 0.08);
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: "Cormorant Garamond", serif;
+        line-height: 0.98;
+        letter-spacing: -0.03em;
+      }
+
+      h1 {
+        font-size: clamp(3.4rem, 8vw, 6.4rem);
+      }
+
+      h2 {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        margin-bottom: 1rem;
+      }
+
+      h3 {
+        font-size: 1.9rem;
+        margin-bottom: 0.65rem;
+      }
+
+      p {
+        color: var(--muted);
+        font-size: 1rem;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        padding: 1rem 0 0;
+        backdrop-filter: blur(16px);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1rem 1.2rem;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.78);
+        border: 1px solid rgba(106, 74, 66, 0.08);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.9rem;
+        min-width: 0;
+      }
+
+      .brand-mark {
+        width: 48px;
+        height: 48px;
+        border-radius: 16px;
+        display: grid;
+        place-items: center;
+        color: var(--mocha-deep);
+        font-weight: 800;
+        background: linear-gradient(
+          135deg,
+          var(--pink),
+          var(--lavender),
+          var(--mint)
+        );
+        box-shadow: 0 12px 24px rgba(216, 181, 116, 0.14);
+      }
+
+      .brand-text strong {
+        display: block;
+        font-size: 1rem;
+        color: var(--mocha-deep);
+      }
+
+      .brand-text span {
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 1.2rem;
+        color: var(--muted);
+        font-size: 0.96rem;
+        flex-wrap: wrap;
+      }
+
+      .nav-links a {
+        transition:
+          transform var(--transition),
+          color var(--transition);
+      }
+
+      .nav-links a:hover {
+        color: var(--mocha);
+        transform: translateY(-2px);
+      }
+
+      .hero {
+        padding: 2rem 0 5rem;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 1.4rem;
+        align-items: stretch;
+      }
+
+      .hero-copy,
+      .hero-visual {
+        min-width: 0;
+      }
+
+      .hero-copy {
+        background:
+          linear-gradient(
+            155deg,
+            rgba(255, 255, 255, 0.95),
+            rgba(255, 244, 241, 0.92)
+          ),
+          linear-gradient(
+            135deg,
+            rgba(217, 208, 248, 0.2),
+            rgba(216, 240, 230, 0.2)
+          );
+        border: 1px solid rgba(106, 74, 66, 0.08);
+        box-shadow: var(--shadow);
+        border-radius: var(--radius-xl);
+        padding: clamp(2rem, 5vw, 4rem);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-copy::after {
+        content: "";
+        position: absolute;
+        width: 260px;
+        height: 260px;
+        right: -70px;
+        bottom: -80px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(216, 181, 116, 0.18),
+          transparent 70%
+        );
+      }
+
+      .hero-copy p {
+        max-width: 58ch;
+        font-size: 1.04rem;
+        margin-top: 1rem;
+      }
+
+      .hero-actions {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin: 2rem 0 1.5rem;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem 1.45rem;
+        border-radius: 999px;
+        font-weight: 700;
+        transition:
+          transform var(--transition),
+          box-shadow var(--transition),
+          background var(--transition),
+          border-color var(--transition);
+      }
+
+      .btn-primary {
+        color: #2b1e1f;
+        background: linear-gradient(
+          135deg,
+          var(--pink),
+          var(--gold),
+          var(--lavender)
+        );
+        box-shadow: 0 16px 32px rgba(216, 181, 116, 0.2);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 22px 40px rgba(216, 181, 116, 0.26);
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.82);
+        border: 1px solid rgba(106, 74, 66, 0.1);
+        color: var(--mocha);
+      }
+
+      .btn-secondary:hover {
+        transform: translateY(-3px);
+        background: #fff;
+      }
+
+      .hero-points {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        margin-top: 1.2rem;
+      }
+
+      .hero-points span {
+        padding: 0.65rem 0.9rem;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(106, 74, 66, 0.08);
+        color: var(--mocha);
+        font-size: 0.9rem;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .hero-visual {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .hero-main-image {
+        min-height: 520px;
+        border-radius: var(--radius-xl);
+        overflow: hidden;
+        position: relative;
+        box-shadow: var(--shadow);
+      }
+
+      .hero-main-image img {
+        height: 100%;
+        transition: transform 0.7s ease;
+      }
+
+      .hero-main-image:hover img {
+        transform: scale(1.04);
+      }
+
+      .hero-badge {
+        position: absolute;
+        left: 1.2rem;
+        bottom: 1.2rem;
+        padding: 1rem 1.1rem;
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.84);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(106, 74, 66, 0.08);
+        box-shadow: var(--shadow-soft);
+        max-width: 260px;
+      }
+
+      .hero-badge strong {
+        display: block;
+        color: var(--mocha-deep);
+        margin-bottom: 0.2rem;
+      }
+
+      .hero-stack {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+
+      .mini-image {
+        height: 180px;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .mini-image img {
+        height: 100%;
+        transition: transform 0.7s ease;
+      }
+
+      .mini-image:hover img {
+        transform: scale(1.06);
+      }
+
+      .about-card {
+        max-width: 900px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.86);
+        border: 1px solid rgba(106, 74, 66, 0.08);
+        border-radius: var(--radius-xl);
+        padding: 2.2rem;
+        text-align: center;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1.2rem;
+      }
+
+      .service-card,
+      .testimonial,
+      .gallery-item {
+        background: var(--surface);
+        border: 1px solid rgba(106, 74, 66, 0.08);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .service-card {
+        border-radius: var(--radius-lg);
+        padding: 1.4rem;
+        transition:
+          transform var(--transition),
+          box-shadow var(--transition);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.98),
+          rgba(255, 246, 243, 0.92)
+        );
+      }
+
+      .service-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow);
+      }
+
+      .service-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 18px;
+        display: grid;
+        place-items: center;
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: var(--mocha-deep);
+        background: linear-gradient(
+          135deg,
+          var(--pink),
+          var(--mint),
+          var(--lavender)
+        );
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 1rem;
+      }
+
+      .gallery-item {
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .gallery-item img {
+        height: 100%;
+        min-height: 260px;
+        transition: transform 0.6s ease;
+      }
+
+      .gallery-item:hover img {
+        transform: scale(1.08);
+      }
+
+      .gallery-item:nth-child(1) {
+        grid-column: span 5;
+      }
+      .gallery-item:nth-child(2) {
+        grid-column: span 3;
+      }
+      .gallery-item:nth-child(3) {
+        grid-column: span 4;
+      }
+      .gallery-item:nth-child(4) {
+        grid-column: span 4;
+      }
+      .gallery-item:nth-child(5) {
+        grid-column: span 4;
+      }
+      .gallery-item:nth-child(6) {
+        grid-column: span 4;
+      }
+
+      .gallery-label {
+        position: absolute;
+        left: 1rem;
+        bottom: 1rem;
+        padding: 0.7rem 0.95rem;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.86);
+        color: var(--mocha);
+        font-size: 0.88rem;
+        font-weight: 700;
+        backdrop-filter: blur(10px);
+      }
+
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.2rem;
+      }
+
+      .testimonial {
+        border-radius: var(--radius-lg);
+        padding: 1.5rem;
+        transition:
+          transform var(--transition),
+          box-shadow var(--transition);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.98),
+          rgba(248, 241, 245, 0.92)
+        );
+      }
+
+      .testimonial:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow);
+      }
+
+      .stars {
+        color: var(--gold);
+        letter-spacing: 0.2em;
+        margin-bottom: 1rem;
+        font-size: 1rem;
+      }
+
+      .testimonial strong {
+        display: block;
+        margin-top: 1rem;
+        color: var(--mocha);
+        font-size: 0.95rem;
+      }
+
+      .contact-wrap {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 1.3rem;
+        align-items: stretch;
+      }
+
+      .contact-card {
+        padding: 2rem;
+        border-radius: var(--radius-xl);
+        background: linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.98),
+          rgba(255, 244, 241, 0.94)
+        );
+        border: 1px solid rgba(106, 74, 66, 0.08);
+        box-shadow: var(--shadow);
+      }
+
+      .contact-card p {
+        max-width: 56ch;
+        margin-top: 1rem;
+        margin-bottom: 1.8rem;
+      }
+
+      .contact-actions {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .contact-visual {
+        border-radius: var(--radius-xl);
+        overflow: hidden;
+        min-height: 100%;
+        box-shadow: var(--shadow);
+      }
+
+      .contact-visual img {
+        height: 100%;
+        min-height: 420px;
+      }
+
+      footer {
+        padding: 2rem 0 2.6rem;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.94rem;
+      }
+
+      @media (max-width: 1024px) {
+        .hero-grid,
+        .contact-wrap {
+          grid-template-columns: 1fr;
+        }
+
+        .services-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .testimonials-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .gallery-item:nth-child(n) {
+          grid-column: span 6;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .topbar {
+          position: static;
+        }
+
+        .nav {
+          border-radius: 28px;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .nav-links {
+          width: 100%;
+          justify-content: space-between;
+          gap: 0.8rem;
+        }
+
+        .hero {
+          padding-top: 1rem;
+        }
+
+        .section {
+          padding: 4rem 0;
+        }
+
+        .hero-actions,
+        .contact-actions {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .btn {
+          width: 100%;
+        }
+
+        .hero-stack,
+        .services-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .gallery-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .gallery-item:nth-child(n) {
+          grid-column: auto;
+        }
+
+        .hero-main-image {
+          min-height: 380px;
+        }
+
+        .contact-visual img {
+          min-height: 320px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container">
+        <nav class="nav">
+          <a href="#top" class="brand">
+            <span class="brand-mark">P</span>
+            <span class="brand-text">
+              <strong>Premium Cake Studio</strong>
+              <span>Luxury cakes, desserts, and catering</span>
+            </span>
+          </a>
+          <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#testimonials">Reviews</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <span class="eyebrow">Elegant Catering & Cakes</span>
+            <h1>Premium Cake Studio</h1>
+            <p>Delicious cakes crafted for every occasion.</p>
+            <p>
+              From intimate birthdays to grand celebrations, discover
+              handcrafted cakes, beautiful dessert tables, small chops, and
+              refined catering made to impress your guests and elevate every
+              moment.
+            </p>
+            <div class="hero-actions">
+              <a
+                class="btn btn-primary"
+                href="https://wa.me/2348012345678?text=Hello%20I%20want%20to%20order%20a%20cake"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Order on WhatsApp</a
+              >
+              <a class="btn btn-secondary" href="#gallery">View Cakes</a>
+            </div>
+            <div class="hero-points">
+              <span>Custom celebration cakes</span>
+              <span>Luxury dessert styling</span>
+              <span>Freshly prepared catering</span>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <div class="hero-main-image">
+              <img
+                src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=1200&q=80"
+                alt="Elegant cake display"
+              />
+              <div class="hero-badge">
+                <strong>Crafted to feel unforgettable</strong>
+                <span
+                  >Beautiful cakes and elevated event treats for every special
+                  celebration.</span
+                >
+              </div>
+            </div>
+            <div class="hero-stack">
+              <div class="mini-image">
+                <img
+                  src="https://images.unsplash.com/photo-1559622214-f8a9850965bb?auto=format&fit=crop&w=900&q=80"
+                  alt="Decorated cake"
+                />
+              </div>
+              <div class="mini-image">
+                <img
+                  src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=900&q=80"
+                  alt="Desserts and pastries"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="about">
+        <div class="container">
+          <div class="section-head">
+            <span class="eyebrow">About</span>
+            <h2>Designed for celebrations that deserve something beautiful.</h2>
+          </div>
+          <div class="about-card">
+            <p>
+              Premium Cake Studio creates elegant cakes, curated dessert
+              experiences, and refined catering options for birthdays, weddings,
+              private events, and memorable gatherings. Every order is prepared
+              with a focus on taste, presentation, and the kind of detail that
+              makes your event feel effortlessly special.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="services">
+        <div class="container">
+          <div class="section-head">
+            <span class="eyebrow">Services</span>
+            <h2>Beautifully prepared for every kind of event.</h2>
+            <p>
+              Choose from signature cakes, event desserts, and catering services
+              tailored to make every celebration feel polished and delicious.
+            </p>
+          </div>
+
+          <div class="services-grid">
+            <article class="service-card">
+              <div class="service-icon">01</div>
+              <h3>Birthday Cakes</h3>
+              <p>
+                Custom birthday cakes with smooth finishes, elegant details, and
+                memorable flavors crafted to make every celebration feel
+                personal and joyful.
+              </p>
+            </article>
+
+            <article class="service-card">
+              <div class="service-icon">02</div>
+              <h3>Wedding Cakes</h3>
+              <p>
+                Refined wedding cakes designed with graceful tiers, soft
+                textures, and a premium presentation worthy of your most
+                important day.
+              </p>
+            </article>
+
+            <article class="service-card">
+              <div class="service-icon">03</div>
+              <h3>Small Chops</h3>
+              <p>
+                Freshly prepared bite-sized treats arranged beautifully for
+                parties, receptions, office events, and stylish social
+                gatherings.
+              </p>
+            </article>
+
+            <article class="service-card">
+              <div class="service-icon">04</div>
+              <h3>Catering Services</h3>
+              <p>
+                Well-curated catering for intimate and large events, combining
+                delicious menus with a clean, polished presentation your guests
+                will enjoy.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="gallery">
+        <div class="container">
+          <div class="section-head">
+            <span class="eyebrow">Gallery</span>
+            <h2>Signature cakes and dessert moments.</h2>
+            <p>
+              Explore a collection of elegant cakes, dreamy textures, and
+              celebration-ready treats designed to look as incredible as they
+              taste.
+            </p>
+          </div>
+
+          <div class="gallery-grid">
+            <figure class="gallery-item">
+              <img
+                src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?auto=format&fit=crop&w=1000&q=80"
+                alt="Pink decorated cake"
+              />
+              <figcaption class="gallery-label">Celebration Cakes</figcaption>
+            </figure>
+            <figure class="gallery-item">
+              <img
+                src="https://images.pexels.com/photos/16404649/pexels-photo-16404649.jpeg?auto=compress&cs=tinysrgb&w=900"
+                alt="Wedding cake"
+              />
+              <figcaption class="gallery-label">Wedding Cakes</figcaption>
+            </figure>
+            <figure class="gallery-item">
+              <img
+                src="https://images.unsplash.com/photo-1464306076886-da185f6a9d05?auto=format&fit=crop&w=1000&q=80"
+                alt="Dessert table"
+              />
+              <figcaption class="gallery-label">Dessert Styling</figcaption>
+            </figure>
+            <figure class="gallery-item">
+              <img
+                src="https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?auto=format&fit=crop&w=1000&q=80"
+                alt="Cupcakes"
+              />
+              <figcaption class="gallery-label">Sweet Details</figcaption>
+            </figure>
+            <figure class="gallery-item">
+              <img
+                src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1000&q=80"
+                alt="Chocolate cake"
+              />
+              <figcaption class="gallery-label">Luxury Finishes</figcaption>
+            </figure>
+            <figure class="gallery-item">
+              <img
+                src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?auto=format&fit=crop&w=1000&q=80"
+                alt="Pastel cake"
+              />
+              <figcaption class="gallery-label">Pastel Elegance</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="testimonials">
+        <div class="container">
+          <div class="section-head">
+            <span class="eyebrow">Testimonials</span>
+            <h2>Loved by customers for taste and presentation.</h2>
+          </div>
+
+          <div class="testimonials-grid">
+            <article class="testimonial">
+              <div class="stars">★★★★★</div>
+              <p>"Amazing cakes and great customer service!"</p>
+              <strong>Happy Customer</strong>
+            </article>
+
+            <article class="testimonial">
+              <div class="stars">★★★★★</div>
+              <p>"Beautiful designs and very delicious!"</p>
+              <strong>Loyal Client</strong>
+            </article>
+
+            <article class="testimonial">
+              <div class="stars">★★★★★</div>
+              <p>"Highly recommend for events and celebrations!"</p>
+              <strong>Event Host</strong>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="container contact-wrap">
+          <div class="contact-card">
+            <span class="eyebrow">Contact</span>
+            <h2>Ready to order something beautiful?</h2>
+            <p>
+              Reach out for celebration cakes, dessert boxes, small chops, and
+              catering bookings. We’re here to help you create a sweet and
+              stylish experience for your next event.
+            </p>
+            <div class="contact-actions">
+              <a
+                class="btn btn-primary"
+                href="https://wa.me/demo?text=Hello%20I%20want%20to%20order%20a%20cake"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Order on WhatsApp</a
+              >
+              <a
+                class="btn btn-secondary"
+                href="https://instagram.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Visit Instagram</a
+              >
+            </div>
+          </div>
+
+          <div class="contact-visual">
+            <img
+              src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=1200&q=80"
+              alt="Cake and dessert arrangement"
+            />
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2026 Premium Cake Studio. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>
